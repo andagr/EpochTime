@@ -8,14 +8,22 @@ namespace EpochTime
 
         public EpochTime( long epochTime, Unit unit = Unit.Seconds )
         {
+            if ( epochTime < 0 )
+            {
+                throw new ArgumentOutOfRangeException( "epochTime", "epochTime can not be a negative number." );
+            }
             Time = unit == Unit.Seconds ? epochTime * 1000 : epochTime;
         }
 
         public EpochTime( DateTime dateTime )
         {
+            if ( dateTime < Epoch )
+            {
+                throw new ArgumentOutOfRangeException("dateTime", "Minimum datetime is 1970-01-01.");
+            }
             Time = (long) TimeZoneInfo.ConvertTimeToUtc( dateTime )
-                                    .Subtract( new DateTime( 1970, 1, 1, 0, 0, 0, DateTimeKind.Utc ) )
-                                    .TotalMilliseconds;
+                              .Subtract( Epoch )
+                              .TotalMilliseconds;
         }
 
         public enum Unit
