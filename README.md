@@ -8,3 +8,4 @@ Unix time is measured by counting the number of seconds since 1970-01-01 00:00 U
 * Implicit conversion between EpochTime and DateTime.
 * Equality operators.
 * Addition/subtraction of times.
+* Supports milliseonds.
